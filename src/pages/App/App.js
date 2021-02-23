@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Route, NavLink} from 'react-router-dom';
+import * as puppyAPI from '../../services/puppies-api'
 
 class App extends Component {
   state = {
