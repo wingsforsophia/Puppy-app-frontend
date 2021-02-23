@@ -8,6 +8,11 @@ class App extends Component {
     puppies: []
   };
 
+  async componentDidMount() {
+    const puppies = await puppyAPI.getAll()
+    this.setState({puppies})
+  }
+
   render() {
     return (
       <div className="App">
