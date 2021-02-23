@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {Route, NavLink} from 'react-router-dom';
 import * as puppyAPI from '../../services/puppies-api'
+import PuppyListPage from '../PuppyListPage/PuppyListPage'
 
 class App extends Component {
   state = {
@@ -25,7 +26,14 @@ class App extends Component {
           </nav>
         </header>
         <main>
-          
+          <Route
+            exact path='/'
+            render={({history}) => 
+              <PuppyListPage
+                puppies={this.state.puppies}
+              />
+            }
+          />
         </main>
       </div>
     )
