@@ -3,6 +3,7 @@ import './App.css';
 import {Route, NavLink} from 'react-router-dom';
 import * as puppyAPI from '../../services/puppies-api'
 import PuppyListPage from '../PuppyListPage/PuppyListPage'
+import AddPuppyPage from '../AddPuppyPage/AddPuppyPage'
 
 class App extends Component {
   state = {
@@ -12,6 +13,13 @@ class App extends Component {
   async componentDidMount() {
     const puppies = await puppyAPI.getAll()
     this.setState({puppies})
+  }
+
+  handleAddPuppy = async newPupData => {
+    const newPup = await puppyAPI.create(newPupData)
+    this.setState(state => ({
+      puppies: [...state.puppies, newPup]
+    }), ()=> this.props.history.push('/'))
   }
 
   render() {
@@ -31,6 +39,14 @@ class App extends Component {
             render={({history}) => 
               <PuppyListPage
                 puppies={this.state.puppies}
+              />
+            }
+          />
+          <Route 
+            exact path='/add'
+            render={() => 
+              <AddPuppyPage 
+                handleAddPuppy={this.handleAddPuppy}
               />
             }
           />

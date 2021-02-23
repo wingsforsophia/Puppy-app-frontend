@@ -1,5 +1,6 @@
 import React from 'react'
 import './PuppyListPage.css'
+import PuppyCard from '../../components/PuppyCard/PuppyCard'
 
 const PuppyListPage = (props) => {
     return ( 
@@ -7,11 +8,10 @@ const PuppyListPage = (props) => {
             <h1>Puppy List</h1>
             <div className='PuppyListPage-grid'>
             {props.puppies.map(puppy =>
-            <div>
-                <li>Puppy Name: {puppy.name}</li>
-                <li>Breed: {puppy.breed}</li>
-                <li>Age: {puppy.age}</li>
-            </div>
+            <PuppyCard 
+                key={puppy._id}
+                puppy={puppy}
+            />
         )}
       </div>
         </>
