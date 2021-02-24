@@ -4,6 +4,7 @@ import {Route, NavLink} from 'react-router-dom';
 import * as puppyAPI from '../../services/puppies-api'
 import PuppyListPage from '../PuppyListPage/PuppyListPage'
 import AddPuppyPage from '../AddPuppyPage/AddPuppyPage'
+import EditPuppyPage from '../EditPuppyPage/EditPuppyPage'
 
 class App extends Component {
   state = {
@@ -27,6 +28,15 @@ class App extends Component {
     this.setState(state => ({
       puppies: state.puppies.filter(p => p._id !== id)
     }), () => this.props.history.push('/'));
+  }
+
+  handleUpdatePuppy = async updatedPupData => {
+    const updatedPuppy = await puppyAPI.update(updatedPupData)
+    const newPuppiesArray = this.state.puppies.map(p =>
+      p._id === updatedPuppy._id ? updatedPuppy : p  
+    )
+    this.setState({puppies: newPuppiesArray},
+      () => this.props.history.push('/'))
   }
 
   render() {
@@ -54,6 +64,15 @@ class App extends Component {
             render={() => 
               <AddPuppyPage 
                 handleAddPuppy={this.handleAddPuppy}
+              />
+            }
+          />
+          <Route 
+            exact path='/edit'
+            render={({location}) => 
+              <EditPuppyPage 
+                location={location}
+                handleUpdatePuppy={this.handleUpdatePuppy}
               />
             }
           />
