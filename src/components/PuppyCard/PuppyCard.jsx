@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PuppyCard({puppy}) {
+function PuppyCard({puppy, handleDeletePuppy}) {
     return (
         <div className='panel panel-default'>
             <div className="panel-heading">
@@ -14,6 +14,15 @@ function PuppyCard({puppy}) {
                     <dd>{puppy.age}</dd>
                 </dl>
             </div>
+            <div className='panel-footer'>
+            <button
+                className='btn btn-xs btn-danger margin-left-10'
+                onClick={() => handleDeletePuppy(puppy._id)}
+            >
+                DELETE
+            </button>
+            </div>
+
         </div>
     )
 }

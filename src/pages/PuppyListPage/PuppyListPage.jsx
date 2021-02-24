@@ -11,6 +11,7 @@ const PuppyListPage = (props) => {
             <PuppyCard 
                 key={puppy._id}
                 puppy={puppy}
+                handleDeletePuppy={props.handleDeletePuppy}
             />
         )}
       </div>
